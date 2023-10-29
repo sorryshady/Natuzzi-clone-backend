@@ -3,7 +3,9 @@ const compression = require('compression')
 const httpStatus = require('http-status')
 const cors = require('cors')
 const helmet = require('helmet')
-const routes = require('./routes/v1')
+const { errorHandler } = require('./middlewares/errorHandler')
+const ApiError = require('./utils/ApiError')
+const routes = require('./routes/index')
 
 const app = express()
 
@@ -16,11 +18,10 @@ app.options('*', cors())
 
 app.use('/v1', routes)
 
-app.use((req, res) => {
-  res.send({
-    code: httpStatus.NOT_FOUND,
-    message: 'Resource not found',
-  })
+app.use((req, res, next) => {
+  console.log('invalid address')
+  next(new ApiError(httpStatus.NOT_FOUND, 'Not found'))
 })
+app.use(errorHandler)
 
 module.exports = app
