@@ -10,7 +10,7 @@ const envVarsSchema = Joi.object()
       .valid('production', 'development', 'test')
       .required(),
     PORT: Joi.number().default(3000),
-    DB_URI: Joi.string().required().description('Mongo DB Url'),
+    // DB_URI: Joi.string().required().description('Mongo DB Url'),
   })
   .unknown()
 

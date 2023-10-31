@@ -4,7 +4,7 @@ const httpStatus = require('http-status')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  res.send({
+  res.status(httpStatus.OK).json({
     code: httpStatus.OK,
     message: 'succesfull load',
   })
