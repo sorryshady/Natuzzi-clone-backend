@@ -4,11 +4,6 @@ const bcrypt = require('bcrypt')
 
 const companyUserSchema = mongoose.Schema(
   {
-    // accountType: {
-    //   type: String,
-    //   required: true,
-    //   enum: ['private', 'company'],
-    // },
     firstName: {
       type: String,
       required: true,

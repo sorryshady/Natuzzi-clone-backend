@@ -5,12 +5,6 @@ const authValidation = require('../validations/auth.validation')
 const authController = require('../controllers/auth.controller')
 const router = express.Router()
 
-// router.post('/register', validate(authValidation.register), (req, res) => {
-//   res.send({
-//     code: httpStatus.OK,
-//     data: req.body,
-//   })
-// })
 router.post(
   '/register',
   validate(authValidation.register),

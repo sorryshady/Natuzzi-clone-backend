@@ -5,8 +5,9 @@ const bcrypt = require('bcrypt')
 
 const createUser = async (userBody) => {
   const accountType = userBody.accountType
+  const offers = userBody.offers
   const email = userBody.data.email
-  const newData = { accountType, ...userBody.data }
+  const newData = { accountType, offers, ...userBody.data }
   if (
     (await PrivateUser.isEmailTaken(email)) ||
     (await CompanyUser.isEmailTaken(email))

@@ -4,6 +4,7 @@ const { password } = require('./custom.validation')
 const register = {
   body: Joi.object().keys({
     accountType: Joi.string().valid('private', 'company').required(),
+    offers: Joi.boolean(),
     data: Joi.object().when('accountType', {
       is: 'private',
       then: Joi.object({
@@ -11,7 +12,6 @@ const register = {
         lastName: Joi.string().required(),
         email: Joi.string().required().email(),
         password: Joi.string().required().custom(password),
-        offers: Joi.boolean(),
       }),
       otherwise: Joi.object({
         company: Joi.string().required(),
@@ -25,7 +25,6 @@ const register = {
         lastName: Joi.string().required(),
         email: Joi.string().required().email(),
         password: Joi.string().required().custom(password),
-        offers: Joi.boolean(),
       }),
     }),
   }),
