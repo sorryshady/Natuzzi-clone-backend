@@ -1,0 +1,27 @@
+// Assuming you have received the data from the frontend
+const dataFromFrontend = {
+  accountType: 'private', // or 'company'
+  formData: {
+    // Include the fields for either private or company users
+    // ...
+  },
+};
+
+let user;
+
+if (dataFromFrontend.accountType === 'private') {
+  // Create a new private user document
+  user = new User.PrivateUser(dataFromFrontend.formData);
+} else if (dataFromFrontend.accountType === 'company') {
+  // Create a new company user document
+  user = new User.CompanyUser(dataFromFrontend.formData);
+}
+
+// Save the user to the database
+user.save()
+  .then(() => {
+    console.log('User saved successfully.');
+  })
+  .catch((err) => {
+    console.error('Error saving user:', err);
+  });
