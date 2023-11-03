@@ -4,11 +4,11 @@ const bcrypt = require('bcrypt')
 
 const companyUserSchema = mongoose.Schema(
   {
-    accountType: {
-      type: String,
-      required: true,
-      enum: ['private', 'company'],
-    },
+    // accountType: {
+    //   type: String,
+    //   required: true,
+    //   enum: ['private', 'company'],
+    // },
     firstName: {
       type: String,
       required: true,
@@ -53,7 +53,7 @@ const companyUserSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    VAT: {
+    vat: {
       type: String,
       required: true,
       unique: true,

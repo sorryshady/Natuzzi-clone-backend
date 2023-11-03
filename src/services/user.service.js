@@ -14,17 +14,15 @@ const createUser = async (userBody) => {
     throw new ApiError(httpStatus.OK, 'Email already taken')
   }
   if (accountType === 'private') {
-    // console.log(newData)
+    const user = await PrivateUser.create(newData)
+    return user
+  } else {
     try {
-      const user = await PrivateUser.create(newData)
+      const user = await CompanyUser.create(newData)
+      return user
     } catch (error) {
       console.error(error)
     }
-    // return user
-  } else {
-    console.log(newData)
-    // const user = await CompanyUser.create(newData)
-    // return user
   }
 }
 
