@@ -7,17 +7,21 @@ const createUser = async (userBody) => {
   const accountType = userBody.accountType
   const email = userBody.data.email
   const newData = { accountType, ...userBody.data }
+  if (
+    (await PrivateUser.isEmailTaken(email)) ||
+    (await CompanyUser.isEmailTaken(email))
+  ) {
+    throw new ApiError(httpStatus.OK, 'Email already taken')
+  }
   if (accountType === 'private') {
-    if (await PrivateUser.isEmailTaken(email)) {
-      throw new ApiError(httpStatus.OK, 'Email already taken')
+    // console.log(newData)
+    try {
+      const user = await PrivateUser.create(newData)
+    } catch (error) {
+      console.error(error)
     }
-    console.log(newData)
-    // const user = await PrivateUser.create(newData)
     // return user
   } else {
-    if (await CompanyUser.isEmailTaken(email)) {
-      throw new ApiError(httpStatus.OK, 'Email already taken')
-    }
     console.log(newData)
     // const user = await CompanyUser.create(newData)
     // return user

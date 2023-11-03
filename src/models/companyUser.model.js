@@ -1,41 +1,86 @@
 const mongoose = require('mongoose')
-// const validator = require('validator')
+const validator = require('validator')
 const bcrypt = require('bcrypt')
-const commonFields = require('./commonFields')
 
-const companyUserSchema = mongoose.Schema({
-  ...commonFields,
-  company: {
-    type: String,
-    required: true,
-    unique: true,
+const companyUserSchema = mongoose.Schema(
+  {
+    accountType: {
+      type: String,
+      required: true,
+      enum: ['private', 'company'],
+    },
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      lowercase: true,
+      validate: (value) => validator.isEmail(value),
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minLength: 8,
+      validate(value) {
+        if (
+          !value.match(/\d/) ||
+          !value.match(/[A-Z]/) ||
+          !value.match(/[@$!%*?&]/)
+        ) {
+          throw new Error(
+            'Password must contain at least one uppercase letter, one number, and one special character'
+          )
+        }
+      },
+    },
+    offers: {
+      type: Boolean,
+      required: false, // Not required
+    },
+    company: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    VAT: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    zipcode: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
   },
-  VAT: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  zipcode: {
-    type: String,
-    required: true,
-  },
-  country: {
-    type: String,
-    required: true,
-  },
-  state: {
-    type: String,
-    required: true,
-  },
-})
+  { timestamps: true }
+)
 
 companyUserSchema.statics.isEmailTaken = async function (email) {
   const count = await this.countDocuments({ email })
