@@ -27,6 +27,15 @@ const createUser = async (userBody) => {
   }
 }
 
+const getUserByEmail = async (email) => {
+  const privateUser = await PrivateUser.findOne({ email })
+  if (privateUser) {
+    return privateUser
+  }
+  return CompanyUser.findOne({ email })
+}
+
 module.exports = {
   createUser,
+  getUserByEmail,
 }

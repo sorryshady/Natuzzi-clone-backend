@@ -55,10 +55,12 @@ privateUserSchema.statics.isEmailTaken = async function (email) {
   const count = await this.countDocuments({ email })
   return count > 0
 }
+
 privateUserSchema.methods.isPasswordMatch = async function (password) {
   const user = this
   return bcrypt.compare(password, user.password)
 }
+
 privateUserSchema.pre('save', async function (next) {
   const user = this
   if (user.isModified('password')) {
