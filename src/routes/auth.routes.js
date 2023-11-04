@@ -10,11 +10,8 @@ router.post(
   validate(authValidation.register),
   authController.register
 )
-router.post('/login', (req, res) => {
-  res.send({
-    code: httpStatus.OK,
-    message: 'received login info',
-  })
+router.post('/login', validate(authValidation.login), (req, res) => {
+  res.send('trying to login')
 })
 
 module.exports = router

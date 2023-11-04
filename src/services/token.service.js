@@ -19,15 +19,21 @@ const generateToken = (
   return jwt.sign(payload, secret)
 }
 
-const generateAuthTokens = async (user) => {
+const generateAuthTokens = async (user, rememberMe = false) => {
+  const tokenExpirationMinutes = rememberMe
+    ? config.jwt.rememberMeAccessExpirationMinutes
+    : config.jwt.accessExpirationMinutes
+
   const tokenExpiry =
-    Math.floor(Date.now() / 1000) + config.jwt.accessExpirationMinutes * 60
+    Math.floor(Date.now() / 1000) + tokenExpirationMinutes * 60
+
   const accessToken = generateToken(
     user._id,
     user.accountType,
     tokenExpiry,
     tokenTypes.ACCESS
   )
+
   return {
     access: {
       token: accessToken,
