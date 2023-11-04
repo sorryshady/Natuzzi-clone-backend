@@ -19,7 +19,6 @@ app.options('*', cors())
 app.use('/v1', routes)
 
 app.use((req, res, next) => {
-  console.log('invalid address')
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'))
 })
 app.use(errorHandler)
