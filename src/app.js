@@ -6,15 +6,24 @@ const helmet = require('helmet')
 const { errorHandler } = require('./middlewares/errorHandler')
 const ApiError = require('./utils/ApiError')
 const routes = require('./routes/index')
+const passport = require('passport')
+const { jwtStrategy } = require('./configs/passport')
 
 const app = express()
 
 app.use(helmet())
+
 app.use(express.json())
+
 app.use(express.urlencoded({ extended: true }))
+
 app.use(compression())
+
 app.use(cors())
 app.options('*', cors())
+
+app.use(passport.initialize())
+passport.use('jwt', jwtStrategy)
 
 app.use('/v1', routes)
 

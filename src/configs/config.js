@@ -10,7 +10,11 @@ const envVarsSchema = Joi.object()
       .valid('production', 'development', 'test')
       .required(),
     PORT: Joi.number().default(3000),
-    // DB_URI: Joi.string().required().description('Mongo DB Url'),
+    DB_URI: Joi.string().required().description('Mongo DB Url'),
+    JWT_SECRET: Joi.string().required().description('JWT secret key'),
+    JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
+      .default(30)
+      .description('minutes after which access tokens expire'),
   })
   .unknown()
 
@@ -27,5 +31,9 @@ module.exports = {
   port: envVars.PORT,
   mongoose: {
     url: envVars.DB_URI,
+  },
+  jwt: {
+    secret: envVars.JWT_SECRET,
+    accessExpirationMinutes: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
   },
 }
