@@ -5,6 +5,8 @@ const { tokenTypes } = require('../configs/tokens')
 const generateToken = (
   userId,
   user,
+  userName,
+  email,
   expires,
   type,
   secret = config.jwt.secret
@@ -12,6 +14,8 @@ const generateToken = (
   const payload = {
     sub: userId,
     user,
+    userName,
+    email,
     iat: Math.floor(Date.now() / 1000),
     exp: expires,
     type,
@@ -27,9 +31,13 @@ const generateAuthTokens = async (user, rememberMe = false) => {
   const tokenExpiry =
     Math.floor(Date.now() / 1000) + tokenExpirationMinutes * 60
 
+  const userName = user.firstName + ' ' + user.lastName
+
   const accessToken = generateToken(
     user._id,
     user.accountType,
+    userName,
+    user.email,
     tokenExpiry,
     tokenTypes.ACCESS
   )
