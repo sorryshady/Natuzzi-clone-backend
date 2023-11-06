@@ -9,6 +9,7 @@ const register = catchAsync(async (req, res) => {
     expires: tokens.access.expires,
     httpOnly: true,
     sameSite: 'None',
+    secure: 'true',
   })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
   return res.status(httpStatus.CREATED).json({ user })
