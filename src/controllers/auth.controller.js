@@ -8,6 +8,7 @@ const register = catchAsync(async (req, res) => {
   res.cookie('jwt', tokens.access.token, {
     expires: tokens.access.expires,
     httpOnly: true,
+    sameSite: 'None',
   })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
   return res.status(httpStatus.CREATED).json({ user })
@@ -20,6 +21,7 @@ const login = catchAsync(async (req, res) => {
   res.cookie('jwt', tokens.access.token, {
     expires: tokens.access.expires,
     httpOnly: true,
+    sameSite: 'None',
   })
   // return res.status(httpStatus.OK).json({ user, tokens })
   return res.status(httpStatus.OK).json({ user })

@@ -10,7 +10,7 @@ const passport = require('passport')
 const { jwtStrategy } = require('./configs/passport')
 
 const corsOptions = {
-  // origin: "http://localhost:5173",
+  // origin: 'http://localhost:5174',
   // origin: 'http://192.168.1.38:5173',
   origin: 'https://natuzzi-clone.netlify.app',
   credentials: true,
