@@ -9,6 +9,13 @@ const routes = require('./routes/index')
 const passport = require('passport')
 const { jwtStrategy } = require('./configs/passport')
 
+const corsOptions = {
+  // origin: "http://localhost:5173",
+  // origin: 'http://192.168.1.38:5173',
+  origin: 'https://natuzzi-clone.netlify.app/',
+  credentials: true,
+}
+
 const app = express()
 
 app.use(helmet())
@@ -19,8 +26,10 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(compression())
 
-app.use(cors())
-app.options('*', cors())
+// app.use(cors())
+app.use(cors(corsOptions))
+// app.options('*', cors())
+// app.options('*', cors())
 
 
 app.use(passport.initialize())
