@@ -9,7 +9,7 @@ const register = catchAsync(async (req, res) => {
     expires: tokens.access.expires,
     httpOnly: true,
     sameSite: 'None',
-    secure: 'true',
+    secure: true,
   })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
   return res.status(httpStatus.CREATED).json({ user })
@@ -23,6 +23,7 @@ const login = catchAsync(async (req, res) => {
     expires: tokens.access.expires,
     httpOnly: true,
     sameSite: 'None',
+    secure: true,
   })
   // return res.status(httpStatus.OK).json({ user, tokens })
   return res.status(httpStatus.OK).json({ user })
