@@ -14,11 +14,9 @@ router.post(
 //   res.send('trying to login')
 // })
 router.post('/login', validate(authValidation.login), authController.login)
-// router.get('/logout', validateJwt, (req, res) => {
-//   return res.status(200).send('Succesfull logout')
+router.get('/logout', validateJwt, authController.logout)
+// router.get('/logout', (req, res) => {
+//   return res.status(200).send(req.cookies.jwt)
 // })
-router.get('/logout', (req, res) => {
-  return res.status(200).send(req.cookies.jwt)
-})
 
 module.exports = router

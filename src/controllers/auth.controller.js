@@ -8,9 +8,13 @@ const register = catchAsync(async (req, res) => {
   res.cookie('jwt', tokens.access.token, {
     expires: tokens.access.expires,
     httpOnly: true,
-    // sameSite: 'None',
-    // secure: true,
+    sameSite: 'None',
+    secure: true,
   })
+  // res.cookie('jwt', tokens.access.token, {
+  //   expires: tokens.access.expires,
+  //   httpOnly: true,
+  // })
   res.cookie('loggedIn', true, {
     expires: tokens.access.expires,
   })
@@ -25,9 +29,13 @@ const login = catchAsync(async (req, res) => {
   res.cookie('jwt', tokens.access.token, {
     expires: tokens.access.expires,
     httpOnly: true,
-    // sameSite: 'None',
-    // secure: true,
+    sameSite: 'None',
+    secure: true,
   })
+  // res.cookie('jwt', tokens.access.token, {
+  //   expires: tokens.access.expires,
+  //   httpOnly: true,
+  // })
   res.cookie('loggedIn', true, {
     expires: tokens.access.expires,
   })
@@ -35,7 +43,17 @@ const login = catchAsync(async (req, res) => {
   return res.status(httpStatus.OK).json({ user })
 })
 
+const logout = catchAsync(async (req, res) => {
+  res.clearCookie('jwt')
+  res.clearCookie('loggedIn')
+  return res.status(httpStatus.OK).json({
+    code: httpStatus.OK,
+    message: 'Logout Successfull',
+  })
+})
+
 module.exports = {
   register,
   login,
+  logout,
 }
