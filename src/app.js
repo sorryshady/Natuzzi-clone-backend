@@ -8,17 +8,20 @@ const ApiError = require('./utils/ApiError')
 const routes = require('./routes/index')
 const passport = require('passport')
 const { jwtStrategy } = require('./configs/passport')
+const cookieParser = require('cookie-parser')
 
 const corsOptions = {
-  // origin: 'http://localhost:5173',
+  origin: 'http://localhost:5173',
   // origin: 'http://192.168.1.38:5173',
-  origin: 'https://natuzzi-clone.netlify.app',
+  // origin: 'https://natuzzi-clone.netlify.app',
   credentials: true,
 }
 
 const app = express()
 
 app.use(helmet())
+
+app.use(cookieParser())
 
 app.use(express.json())
 
