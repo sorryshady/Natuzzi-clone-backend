@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const commonUserPropertiesSchema = require('./commonUserProperties.model')
 
 const privateUserSchema = mongoose.Schema(
   {
@@ -47,6 +48,7 @@ const privateUserSchema = mongoose.Schema(
       type: Boolean,
       required: false, // Not required
     },
+    commonProperties: commonUserPropertiesSchema,
   },
   { timestamps: true }
 )

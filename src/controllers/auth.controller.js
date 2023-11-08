@@ -11,6 +11,9 @@ const register = catchAsync(async (req, res) => {
     sameSite: 'None',
     secure: true,
   })
+  res.cookie('loggedIn', true, {
+    expires: tokens.access.expires,
+  })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
   return res.status(httpStatus.CREATED).json({ user })
 })
@@ -24,6 +27,9 @@ const login = catchAsync(async (req, res) => {
     httpOnly: true,
     sameSite: 'None',
     secure: true,
+  })
+  res.cookie('loggedIn', true, {
+    expires: tokens.access.expires,
   })
   // return res.status(httpStatus.OK).json({ user, tokens })
   return res.status(httpStatus.OK).json({ user })
