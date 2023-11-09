@@ -29,10 +29,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(compression())
 
-// app.use(cors())
 app.use(cors(corsOptions))
-// app.options('*', cors())
-// app.options('*', cors())
 
 
 app.use(passport.initialize())
