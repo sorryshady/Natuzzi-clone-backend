@@ -17,6 +17,8 @@ const register = catchAsync(async (req, res) => {
   // })
   res.cookie('loggedIn', true, {
     expires: tokens.access.expires,
+    sameSite: 'None',
+    secure: true,
   })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
   return res.status(httpStatus.CREATED).json({ user })
@@ -38,6 +40,8 @@ const login = catchAsync(async (req, res) => {
   // })
   res.cookie('loggedIn', true, {
     expires: tokens.access.expires,
+    sameSite: 'None',
+    secure: true,
   })
   // return res.status(httpStatus.OK).json({ user, tokens })
   return res.status(httpStatus.OK).json({ user })
