@@ -41,7 +41,6 @@ const login = catchAsync(async (req, res) => {
 
 const logout = catchAsync(async (req, res) => {
   res.clearCookie('jwt')
-  res.clearCookie('loggedIn')
   return res.status(httpStatus.OK).json({
     code: httpStatus.OK,
     message: 'Logout Successfull',
