@@ -17,7 +17,9 @@ const register = catchAsync(async (req, res) => {
   //   secure: true,
   // })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
-  return res.status(httpStatus.CREATED).json({ user })
+  return res
+    .status(httpStatus.CREATED)
+    .json({ user, tokenExpiry: tokens.access.expires })
 })
 
 const login = catchAsync(async (req, res) => {
@@ -36,7 +38,9 @@ const login = catchAsync(async (req, res) => {
   //   secure: true,
   // })
   // return res.status(httpStatus.OK).json({ user, tokens })
-  return res.status(httpStatus.OK).json({ user })
+  return res
+    .status(httpStatus.OK)
+    .json({ user, tokenExpiry: tokens.access.expires })
 })
 
 const logout = catchAsync(async (req, res) => {
