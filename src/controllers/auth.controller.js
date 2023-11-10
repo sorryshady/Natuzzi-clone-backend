@@ -51,8 +51,13 @@ const logout = catchAsync(async (req, res) => {
   })
 })
 
+const fetchUser = catchAsync(async (req, res) => {
+  return res.status(httpStatus.OK).json(req.user)
+})
+
 module.exports = {
   register,
   login,
   logout,
+  fetchUser,
 }

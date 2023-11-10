@@ -10,13 +10,8 @@ router.post(
   validate(authValidation.register),
   authController.register
 )
-// router.post('/login', validate(authValidation.login), (req, res) => {
-//   res.send('trying to login')
-// })
+router.get('/user', validateJwt, authController.fetchUser)
 router.post('/login', validate(authValidation.login), authController.login)
 router.get('/logout', validateJwt, authController.logout)
-// router.get('/logout', (req, res) => {
-//   return res.status(200).send(req.cookies.jwt)
-// })
 
 module.exports = router

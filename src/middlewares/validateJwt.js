@@ -25,6 +25,7 @@ const validateJwt = async (req, res, next) => {
       user = await CompanyUser.findById(userId)
     }
     if (user) {
+      req.user = user
       next()
     } else {
       return res.status(httpStatus.UNAUTHORIZED).json({

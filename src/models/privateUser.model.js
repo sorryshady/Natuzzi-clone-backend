@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
-const commonUserPropertiesSchema = require('./commonUserProperties.model')
 
 const privateUserSchema = mongoose.Schema(
   {
@@ -46,9 +45,26 @@ const privateUserSchema = mongoose.Schema(
     },
     offers: {
       type: Boolean,
-      required: false, // Not required
+      required: false,
     },
-    commonProperties: commonUserPropertiesSchema,
+    birthday: {
+      type: Date,
+      default: null,
+    },
+    phoneNumber: {
+      type: String,
+      default: '',
+    },
+    storeOption: {
+      natuzziItalia: {
+        type: String,
+        default: '',
+      },
+      natuzziEditions: {
+        type: String,
+        default: '',
+      },
+    },
   },
   { timestamps: true }
 )
