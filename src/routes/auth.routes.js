@@ -12,6 +12,6 @@ router.post(
 )
 router.get('/user', validateJwt, authController.fetchUser)
 router.post('/login', validate(authValidation.login), authController.login)
-router.get('/logout', validateJwt, authController.logout)
+router.get('/logout', authController.logout)
 
 module.exports = router

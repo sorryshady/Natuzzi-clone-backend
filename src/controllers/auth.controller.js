@@ -5,8 +5,8 @@ const { userService, tokenService, authService } = require('../services')
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body)
   const tokens = await tokenService.generateAuthTokens(user)
-  res.cookie('jwt', tokens.access.token, {
-    expires: tokens.access.expires,
+  res.cookie('jwt', tokens.token, {
+    expires: tokens.expires,
     httpOnly: true,
     sameSite: 'None',
     secure: true,
@@ -17,17 +17,15 @@ const register = catchAsync(async (req, res) => {
   //   secure: true,
   // })
   // return res.status(httpStatus.CREATED).json({ user, tokens })
-  return res
-    .status(httpStatus.CREATED)
-    .json({ user, tokenExpiry: tokens.access.expires })
+  return res.status(httpStatus.CREATED).json({ user, tokens })
 })
 
 const login = catchAsync(async (req, res) => {
   const { email, password, rememberMe } = req.body
   const user = await authService.loginUser(email, password)
   const tokens = await tokenService.generateAuthTokens(user, rememberMe)
-  res.cookie('jwt', tokens.access.token, {
-    expires: tokens.access.expires,
+  res.cookie('jwt', tokens.token, {
+    expires: tokens.expires,
     httpOnly: true,
     sameSite: 'None',
     secure: true,
@@ -38,13 +36,10 @@ const login = catchAsync(async (req, res) => {
   //   secure: true,
   // })
   // return res.status(httpStatus.OK).json({ user, tokens })
-  return res
-    .status(httpStatus.OK)
-    .json({ user, tokenExpiry: tokens.access.expires })
+  return res.status(httpStatus.OK).json({ user, tokens, rememberMe })
 })
 
 const logout = catchAsync(async (req, res) => {
-  res.clearCookie('jwt')
   return res.status(httpStatus.OK).json({
     code: httpStatus.OK,
     message: 'Logout Successfull',

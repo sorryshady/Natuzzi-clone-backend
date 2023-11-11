@@ -23,14 +23,15 @@ const generateToken = (
   return jwt.sign(payload, secret)
 }
 
+// const generateAuthTokens = async (user, rememberMe = false) => {
 const generateAuthTokens = async (user, rememberMe = false) => {
-  const tokenExpirationMinutes = rememberMe
-    ? config.jwt.rememberMeAccessExpirationMinutes
-    : config.jwt.accessExpirationMinutes
+  const tokenExpirationMinutes = config.jwt.accessExpirationMinutes
+  // const tokenExpirationMinutes = rememberMe
+  //   ? config.jwt.rememberMeAccessExpirationMinutes
+  //   : config.jwt.accessExpirationMinutes
 
   const tokenExpiry =
     Math.floor(Date.now() / 1000) + tokenExpirationMinutes * 60
-
   const userName = user.firstName + ' ' + user.lastName
 
   const accessToken = generateToken(
@@ -43,10 +44,8 @@ const generateAuthTokens = async (user, rememberMe = false) => {
   )
 
   return {
-    access: {
-      token: accessToken,
-      expires: new Date(tokenExpiry * 1000),
-    },
+    token: accessToken,
+    expires: new Date(tokenExpiry * 1000),
   }
 }
 
