@@ -96,6 +96,10 @@ const companyUserSchema = mongoose.Schema(
         default: '',
       },
     },
+    orders: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 )
