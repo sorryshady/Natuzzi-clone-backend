@@ -34,11 +34,23 @@ const validateJwt = async (req, res, next) => {
       })
     }
   } catch (error) {
-    console.log(error.message)
+    // console.log(error.message)
+    if (error.message === 'jwt expired') {
+      return res.status(httpStatus.UNAUTHORIZED).json({
+        code: httpStatus.UNAUTHORIZED,
+        message: 'token has expired',
+      })
+    }
+    if (error.message === 'invalid token') {
+      return res.status(httpStatus.UNAUTHORIZED).json({
+        code: httpStatus.UNAUTHORIZED,
+        message: 'invalid token',
+      })
+    }
+
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpStatus.INTERNAL_SERVER_ERROR,
       message: 'Internal Server Error.',
-      error,
     })
   }
 }

@@ -31,8 +31,7 @@ const generateAuthTokens = async (user, rememberMe = false) => {
   //   : config.jwt.accessExpirationMinutes
 
   const tokenExpiry =
-    // Math.floor(Date.now() / 1000) + tokenExpirationMinutes * 60
-    Math.floor(Date.now() / 1000) + 10
+    Math.floor(Date.now() / 1000) + tokenExpirationMinutes * 60
   const userName = user.firstName + ' ' + user.lastName
 
   const accessToken = generateToken(
