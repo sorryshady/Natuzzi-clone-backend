@@ -34,7 +34,7 @@ const validateJwt = async (req, res, next) => {
       })
     }
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpStatus.INTERNAL_SERVER_ERROR,
       message: 'Internal Server Error.',
