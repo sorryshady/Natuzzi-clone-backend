@@ -39,12 +39,7 @@ const login = catchAsync(async (req, res) => {
   return res.status(httpStatus.OK).json({ user, tokens, rememberMe })
 })
 
-const logout = catchAsync(async (req, res) => {
-  return res.status(httpStatus.OK).json({
-    code: httpStatus.OK,
-    message: 'Logout Successfull',
-  })
-})
+
 
 const fetchUser = catchAsync(async (req, res) => {
   return res.status(httpStatus.OK).json(req.user)
@@ -53,6 +48,5 @@ const fetchUser = catchAsync(async (req, res) => {
 module.exports = {
   register,
   login,
-  logout,
   fetchUser,
 }
